@@ -42,6 +42,10 @@ export default function ProductsScreen() {
           <TouchableOpacity style={styles.secondaryButton}>
             <Text style={styles.secondaryButtonText}>Tüm Ürünler</Text>
           </TouchableOpacity>
+          
+          <TouchableOpacity style={[styles.primaryButton, { marginTop: 10 }]}>
+            <Text style={styles.primaryButtonText}>Bir Ürün Oluşturun</Text>
+          </TouchableOpacity>
         </View>
 
       </View>
