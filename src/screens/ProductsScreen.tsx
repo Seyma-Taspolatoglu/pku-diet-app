@@ -85,8 +85,10 @@ export default function ProductsScreen() {
       unified_name: m.product_name || '',
     }));
 
-    // Combine and Filter by activeTab
-    const combined = activeTab === 'food' ? mappedFoods : mappedMedicals;
+    // mealId yoksa (genel liste) her şeyi göster, varsa sekmeye göre filtrele
+    const combined = mealId 
+      ? (activeTab === 'food' ? mappedFoods : mappedMedicals)
+      : [...mappedFoods, ...mappedMedicals];
     
     // Eğer sekmeler değişirse ve arama yoksa, o sekmeye ait tüm ürünleri getir
     if (!query) {
@@ -258,23 +260,25 @@ export default function ProductsScreen() {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
 
-        {/* Filter Tabs */}
-        <View style={styles.tabsWrapper}>
-          <TouchableOpacity 
-            style={[styles.tabButton, activeTab === 'food' && styles.tabButtonActive]} 
-            onPress={() => setActiveTab('food')}
-          >
-            <Ionicons name="leaf-outline" size={18} color={activeTab === 'food' ? COLORS.white : COLORS.indigo} />
-            <Text style={[styles.tabText, activeTab === 'food' && styles.tabTextActive]}>Gıdalar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={[styles.tabButton, activeTab === 'medical' && styles.tabButtonActive]} 
-            onPress={() => setActiveTab('medical')}
-          >
-            <Ionicons name="medical-outline" size={18} color={activeTab === 'medical' ? COLORS.white : COLORS.indigo} />
-            <Text style={[styles.tabText, activeTab === 'medical' && styles.tabTextActive]}>Tıbbi Ürünler</Text>
-          </TouchableOpacity>
-        </View>
+        {/* Filter Tabs - Sadece öğün ekleme modunda göster */}
+        {mealId && (
+          <View style={styles.tabsWrapper}>
+            <TouchableOpacity 
+              style={[styles.tabButton, activeTab === 'food' && styles.tabButtonActive]} 
+              onPress={() => setActiveTab('food')}
+            >
+              <Ionicons name="leaf-outline" size={18} color={activeTab === 'food' ? COLORS.white : COLORS.indigo} />
+              <Text style={[styles.tabText, activeTab === 'food' && styles.tabTextActive]}>Gıdalar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={[styles.tabButton, activeTab === 'medical' && styles.tabButtonActive]} 
+              onPress={() => setActiveTab('medical')}
+            >
+              <Ionicons name="medical-outline" size={18} color={activeTab === 'medical' ? COLORS.white : COLORS.indigo} />
+              <Text style={[styles.tabText, activeTab === 'medical' && styles.tabTextActive]}>Tıbbi Ürünler</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
