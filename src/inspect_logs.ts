@@ -1,5 +1,5 @@
 
-import { supabase } from './src/lib/supabase';
+import { supabase } from './lib/supabase';
 
 async function inspectLogs() {
   const { data: logs, error } = await supabase.from('user_logs').select('*').limit(5);

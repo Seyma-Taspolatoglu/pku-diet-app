@@ -1,5 +1,5 @@
 
-import { supabase } from './src/lib/supabase';
+import { supabase } from './lib/supabase';
 
 async function checkData() {
   const { data: medical, error } = await supabase.from('medical_products').select('*');
