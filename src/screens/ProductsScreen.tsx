@@ -159,7 +159,8 @@ export default function ProductsScreen() {
            const proteinPer100 = item.protein_per_100g || 0;
            totalProteinEq = (proteinPer100 / 100) * numGrams;
            const phePer1gProtein = item.phe_per_1g_protein || 0;
-           totalPhe = phePer1gProtein * totalProteinEq; 
+           // total_phe veritabanında g cinsinden olabildiği için mg'a çeviriyoruz (* 1000)
+           totalPhe = phePer1gProtein * totalProteinEq * 1000; 
          } else {
            const proteinEqPer100 = item.protein_equivalent_pe || 0;
            totalProteinEq = (proteinEqPer100 / 100) * numGrams;
@@ -191,7 +192,10 @@ export default function ProductsScreen() {
     const isFood = item.unified_type === 'food';
     const name = item.unified_name;
     const pd = isFood ? item.protein_per_100g || 0 : item.protein_equivalent_pe || 0;
-    const phe = isFood ? item.phe_per_1g_protein || 0 : '-'; 
+    // Gıdalar için mg/100g PHE hesapla: (protein/100g) * (phe/1g protein) * 1000
+    const phe = isFood 
+      ? ((item.protein_per_100g || 0) * (item.phe_per_1g_protein || 0) * 1000).toFixed(0) 
+      : '-'; 
     const itemId = `${item.unified_type}-${item.id || index}`;
 
     if (mealId) {
