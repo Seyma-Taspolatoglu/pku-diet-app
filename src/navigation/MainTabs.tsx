@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 // @ts-ignore
 import HomeScreen from '../screens/HomeScreen';
 // @ts-ignore
-import ProductsScreen from '../screens/ProductsScreen';
+import ProductsStack from './ProductsStack';
 // @ts-ignore
 import ProfileScreen from '../screens/ProfileScreen';
 
@@ -48,17 +48,21 @@ export default function MainTabs({ initialRoute = 'Home' }: { initialRoute?: key
       />
       <Tab.Screen
         name="Products"
-        component={ProductsScreen}
+        component={ProductsStack}
         options={{ 
           title: 'Ürün Seçin', 
           headerTitleAlign: 'center',
-          tabBarLabel: 'Ürünler' 
+          tabBarLabel: 'Ürünler',
+          headerShown: false // Prevent double headers
         }}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{ title: 'Profil' }}
+        options={{ 
+          title: 'Profil',
+          headerShown: false 
+        }}
       />
     </Tab.Navigator>
   );
