@@ -7,7 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "pkudietapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
       "supportsTablet": true
     },
@@ -41,7 +41,7 @@
       "@react-native-community/datetimepicker"
     ],
     "experiments": {
-      "reactCompiler": true
+      "reactCompiler": false
     }
   }
 }
